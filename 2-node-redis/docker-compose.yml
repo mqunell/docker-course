@@ -1,0 +1,23 @@
+# Compose version
+version: '3'
+
+# By defining these two services in this file, Docker Compose will
+# automatically connect the containers on essentially the same network
+# so they can access each other without opening any additional ports
+
+# A service is basically a type of container
+# The "redis-server" service uses the "redis" image
+# The "node-app" services uses the Dockerfile in this directory
+
+services:
+  redis-server:
+    image: 'redis'
+
+    # Ports for connecting to the container from local Node
+    # ports:
+    #   - 6379:6379
+  node-app:
+    build: .
+    ports:
+      - 3000:8080
+    restart: always
